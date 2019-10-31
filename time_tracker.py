@@ -5,6 +5,10 @@ import datetime
 
 # log file location
 log_file = os.path.join("log.csv")
+if not os.path.exists(log_file):
+    f = open(log_file, 'a')
+    f.write('date,action\n')
+    f.close()
 
 # load labels from file
 config_file = os.path.join("labels.csv")
@@ -30,7 +34,6 @@ while True:
 
         # log
         report_string = str(datetime.datetime.utcnow()) + ',' + menu_item + '\n'
-        print(report_string)
         f = open(log_file, 'a')
         f.write(report_string)
         f.close()
