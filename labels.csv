@@ -1,9 +1,11 @@
-label_id,label_text,label_icon
-1,FAMOUS work,
-2,FAMOUS Communciation,
-3,Administrative tasks,
-4,PSt1 Communcation,
-5,Research and reading,
-6,Try out new tools,
-7,other
-8,Break,icons/coffee.png
+label_text,label_icon
+FAMOUS work,icons/2699.png
+FAMOUS Communciation,icons/1F4E7.png
+---,
+Administrative tasks,icons/1F4CE.png
+Team Communcation,icons/E24A.png
+---,
+Research and reading,icons/1F4A1.png
+Try out new tools,icons/1F532.png
+Other,icons/1F518.png
+Break,icons/2615.png

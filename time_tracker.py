@@ -1,31 +1,45 @@
-import PySimpleGUI as sg
+import PySimpleGUIQt as sg
 import pandas
 import os
 import datetime
+
+# log file location
+log_file = os.path.join("log.csv")
 
 # load labels from file
 config_file = os.path.join("labels.csv")
 df = pandas.read_csv(config_file)
 
-button_kwargs = {"border_width": 0.1, 
-                 "size": (20,1),
-                 "button_color": ("black","white")}
-
 # put labels into layout
-layout = [[sg.Button(row['label_text'], **button_kwargs)] for i, row in df.iterrows()]
-layout.append([sg.Button('Done', **button_kwargs)])
+options = [row['label_text'] for i, row in df.iterrows()]
+menu_def = ['Menu', [*options, '---', 'Done', '---', 'Exit']]
 
-# create window
-window = sg.Window('Time tracker', layout, background_color='white')
+default_icon = os.path.join('icons','23F1.png')
 
-# Event Loop to process "events" and get the "values" of the inputs
+tray = sg.SystemTray(menu=menu_def, filename=default_icon)
+
 while True:
+    menu_item = tray.Read(timeout=2000)  # timeout of 2 seconds
 
-    event, values = window.read()
-    if event in (None, 'Cancel'):	# if user closes window or clicks cancel
+    # end program, if selected
+    if menu_item == 'Exit':
         break
 
-    report_string = str(datetime.datetime.utcnow()) + ',' + event
-    print(report_string)
+    # otherwise: log entry and change icon
+    if menu_item not in [None, '__TIMEOUT__']:
 
-window.close() 
+        # log
+        report_string = str(datetime.datetime.utcnow()) + ',' + menu_item + '\n'
+        print(report_string)
+        f = open(log_file, 'a')
+        f.write(report_string)
+        f.close()
+
+        # change icon according to selected item
+        if menu_item == "Done":
+            icon_path = default_icon
+        else:
+            icon_path = df[df['label_text'] == menu_item]['label_icon'].values[0]
+        tray.Update(filename = icon_path)
+
+tray.close()
