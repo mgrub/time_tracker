@@ -1,0 +1,5 @@
+numpy
+pandas
+matplotlib
+PySimpleGUIQt
+pyqt5
