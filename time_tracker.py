@@ -11,7 +11,7 @@ if not os.path.exists(log_file):
     f.close()
 
 # load labels from file
-config_file = os.path.join("labels.csv")
+config_file = os.path.join("config_labels.csv")
 df = pandas.read_csv(config_file)
 
 # put labels into layout
@@ -23,14 +23,16 @@ default_icon = os.path.join('icons','23F1.png')
 tray = sg.SystemTray(menu=menu_def, filename=default_icon)
 
 while True:
-    menu_item = tray.Read(timeout=2000)  # timeout of 2 seconds
+    menu_item = tray.Read(timeout=5000)  # timeout of 5 seconds
+
+    print(menu_item)
 
     # end program, if selected
     if menu_item == 'Exit':
         break
 
     # otherwise: log entry and change icon
-    if menu_item not in [None, '__TIMEOUT__']:
+    if menu_item not in [None, '__TIMEOUT__', '__ACTIVATED__']:
 
         # log
         report_string = str(datetime.datetime.utcnow()) + ',' + menu_item + '\n'

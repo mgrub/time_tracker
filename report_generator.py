@@ -6,14 +6,14 @@ register_matplotlib_converters()
 
 import matplotlib.pyplot as plt
 
+# location of logfile
 log_file = os.path.join("log.csv")
-
 df = pandas.read_csv(log_file, parse_dates=[0], index_col=0)
 
 # convert to local timezone
 df = df.tz_localize("UTC").tz_convert("Europe/Berlin")
 
-# keep only last two weeks of records
+# display only last two weeks of records
 cond = (df.index >= df.index.max() - pandas.Timedelta(days=14))
 df = df[cond]
 
