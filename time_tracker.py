@@ -1,7 +1,9 @@
 import PySimpleGUIQt as sg
 import pandas
 import os
+import sys
 import datetime
+import subprocess
 
 # log file location
 log_file = os.path.join("log.csv")
@@ -16,7 +18,7 @@ df = pandas.read_csv(config_file)
 
 # put labels into layout
 options = [row['label_text'] for i, row in df.iterrows()]
-menu_def = ['Menu', [*options, '---', 'Done', '---', 'Exit']]
+menu_def = ['Menu', [*options, '---', 'Done', '---', 'Show report', '---', 'Exit']]
 
 default_icon = os.path.join('icons','23F1.png')
 
@@ -30,6 +32,10 @@ while True:
     # end program, if selected
     if menu_item == 'Exit':
         break
+
+    if menu_item == "Show report":
+        p = subprocess.Popen([sys.executable, 'report_generator.py'], cwd=os.getcwd())
+        continue
 
     # otherwise: log entry and change icon
     if menu_item not in [None, '__TIMEOUT__', '__ACTIVATED__']:
