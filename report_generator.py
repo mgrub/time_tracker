@@ -36,7 +36,7 @@ bottom = numpy.zeros(len(ru.columns))
 for action_label, row in ru.iterrows():
     hours = row.values.astype("double") / (3600 * 1e9)   # nano-seconds to hours
     plt.bar(ru.columns, hours, label=action_label, bottom=bottom)
-    bottom = hours
+    bottom += hours
 
 plt.title("Tracked Time in hours")
 plt.legend()
