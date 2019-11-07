@@ -1,26 +1,27 @@
 import PySimpleGUIQt as sg
-import pandas
 import os
 import sys
 import datetime
 import subprocess
+import json
+
+# read config file
+f = open("config.json", "r")
+config = json.load(f)
+f.close()
 
 # log file location
-log_file = os.path.join("log.csv")
+log_file = os.path.expanduser(config["log_file"])
 if not os.path.exists(log_file):
     f = open(log_file, 'a')
     f.write('date,action\n')
     f.close()
 
-# load labels from file
-config_file = os.path.join("config_labels.csv")
-df = pandas.read_csv(config_file)
-
 # put labels into layout
-options = [row['label_text'] for i, row in df.iterrows()]
+options = [entry[0] for entry in config["labels"]]
 menu_def = ['Menu', [*options, '---', 'Done', '---', 'Show report', '---', 'Exit']]
 
-default_icon = os.path.join('icons','23F1.png')
+default_icon = os.path.join(config["default_icon"])
 
 tray = sg.SystemTray(menu=menu_def, filename=default_icon)
 
@@ -50,7 +51,7 @@ while True:
         if menu_item == "Done":
             icon_path = default_icon
         else:
-            icon_path = df[df['label_text'] == menu_item]['label_icon'].values[0]
+            icon_path = [icon for name, icon in l if name == menu_item][0]
         tray.Update(filename = icon_path)
 
 tray.close()

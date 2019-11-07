@@ -1,0 +1,17 @@
+{
+    "log_file": "~/Nextcloud/time_tracker/log.csv",
+    "editor": "kate",
+    "default_icon": "icons/23F1.png",
+    "labels": [
+        ["FAMOUS work", "icons/2699.png"],
+        ["FAMOUS Communication", "icons/1F4E7.png"],
+        ["---", ""],
+        ["Administrative tasks", "icons/1F4CE.png"],
+        ["Team Communication", "icons/E24A.png"],
+        ["---", ""],
+        ["Research and reading", "icons/1F4A1.png"],
+        ["Try out new tools", "icons/1F532.png"],
+        ["Other", "icons/1F518.png"],
+        ["Break", "icons/2615.png"]
+    ]
+}
