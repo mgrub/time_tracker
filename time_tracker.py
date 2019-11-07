@@ -19,7 +19,7 @@ if not os.path.exists(log_file):
 
 # put labels into layout
 options = [entry[0] for entry in config["labels"]]
-menu_def = ['Menu', [*options, '---', 'Done', '---', 'Show report', '---', 'Exit']]
+menu_def = ['Menu', [*options, '---', 'Done', '---', 'Show report', 'Edit log', '---', 'Exit']]
 
 default_icon = os.path.join(config["default_icon"])
 
@@ -34,12 +34,16 @@ while True:
     if menu_item == 'Exit':
         break
 
-    if menu_item == "Show report":
+    elif menu_item == "Show report":
         p = subprocess.Popen([sys.executable, 'report_generator.py'], cwd=os.getcwd())
         continue
 
+    elif menu_item == "Edit log":
+        p = subprocess.Popen([config["editor"], log_file])
+        continue
+
     # otherwise: log entry and change icon
-    if menu_item not in [None, '__TIMEOUT__', '__ACTIVATED__']:
+    elif menu_item not in [None, '__TIMEOUT__', '__ACTIVATED__']:
 
         # log
         report_string = str(datetime.datetime.utcnow()) + ',' + menu_item + '\n'
@@ -51,7 +55,7 @@ while True:
         if menu_item == "Done":
             icon_path = default_icon
         else:
-            icon_path = [icon for name, icon in l if name == menu_item][0]
+            icon_path = [icon for name, icon in config["labels"] if name == menu_item][0]
         tray.Update(filename = icon_path)
 
 tray.close()
