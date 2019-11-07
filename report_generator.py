@@ -1,13 +1,19 @@
 import os
 import numpy
 import pandas
+import json
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 import matplotlib.pyplot as plt
 
-# location of logfile
-log_file = os.path.join("log.csv")
+# read config file
+f = open("config.json", "r")
+config = json.load(f)
+f.close()
+
+# log file location
+log_file = os.path.expanduser(config["log_file"])
 df = pandas.read_csv(log_file, parse_dates=[0], index_col=0)
 
 # convert to local timezone
