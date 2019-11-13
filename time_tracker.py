@@ -4,6 +4,7 @@ import sys
 import datetime
 import subprocess
 import json
+import shlex
 
 # read config file
 f = open("config.json", "r")
@@ -35,11 +36,13 @@ while True:
         break
 
     elif menu_item == "Show report":
-        p = subprocess.Popen([sys.executable, 'report_generator.py'], cwd=os.getcwd())
+        cmd = shlex.split(config["report"].format(PY_BIN=sys.executable))
+        p = subprocess.Popen(cmd, cwd=os.getcwd())
         continue
 
     elif menu_item == "Edit log":
-        p = subprocess.Popen([config["editor"], log_file])
+        cmd = shlex.split(config["editor"].format(LOG_FILE=log_file))
+        p = subprocess.Popen(cmd)
         continue
 
     # otherwise: log entry and change icon
