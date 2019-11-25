@@ -53,6 +53,8 @@ while True:
             timestamp = datetime.datetime.utcnow()
         else:
             timestamp = datetime.datetime.now()
+        
+        report_string = str(timestamp.replace(microsecond=0)) + ',' + menu_item + '\n'
         f = open(log_file, 'a')
         f.write(report_string)
         f.close()
