@@ -4,6 +4,7 @@
     "report": "konsole --hide-menubar -e \"/bin/bash -c '{PY_BIN} report_generator.py; read'\"",
     "report_only_visual": "{PY_BIN} report_generator.py",
     "default_icon": "icons/black/23F1.png",
+    "use_utc": true,
     "labels": [
         ["FAMOUS work", "icons/black/2699.png"],
         ["FAMOUS Communication", "icons/black/1F4E7.png"],
