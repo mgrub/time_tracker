@@ -7,9 +7,9 @@ import json
 import shlex
 
 # read config file
-f = open("config.json", "r")
-config = json.load(f)
-f.close()
+from read_config import get_config
+
+config = get_config()
 
 # log file location
 log_file = os.path.expanduser(config["log_file"])

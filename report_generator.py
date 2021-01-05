@@ -3,14 +3,15 @@ import numpy
 import pandas
 import json
 from pandas.plotting import register_matplotlib_converters
+
+from read_config import get_config
+
 register_matplotlib_converters()
 
 import matplotlib.pyplot as plt
 
 # read config file
-f = open("config.json", "r")
-config = json.load(f)
-f.close()
+config = get_config()
 
 # log file location
 log_file = os.path.expanduser(config["log_file"])
