@@ -1,7 +1,7 @@
 import os
+
 import numpy
 import pandas
-import json
 from pandas.plotting import register_matplotlib_converters
 
 from read_config import get_config

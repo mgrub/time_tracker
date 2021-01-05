@@ -1,10 +1,10 @@
-import PySimpleGUIQt as sg
-import os
-import sys
 import datetime
-import subprocess
-import json
+import os
 import shlex
+import subprocess
+import sys
+
+import PySimpleGUIQt as sg
 
 # read config file
 from read_config import get_config
