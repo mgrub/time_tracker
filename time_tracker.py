@@ -1,15 +1,15 @@
-import PySimpleGUIQt as sg
-import os
-import sys
 import datetime
-import subprocess
-import json
+import os
 import shlex
+import subprocess
+import sys
+
+import PySimpleGUIQt as sg
 
 # read config file
-f = open("config.json", "r")
-config = json.load(f)
-f.close()
+from read_config import get_config
+
+config = get_config()
 
 # log file location
 log_file = os.path.expanduser(config["log_file"])
